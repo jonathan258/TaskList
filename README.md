@@ -1,125 +1,108 @@
 # Laravel Task List
 
-## Introduction
-This is a simple task list application built using Laravel. It allows users to create, update, delete, and mark tasks as completed or not completed.
+## Overview
+This is a simple Task List application built using Laravel. It allows users to create, update, delete, and mark tasks as completed. The application is structured using Laravel's MVC architecture and includes pagination for task management.
 
 ## Features
-- Create a new task with a title, description, and long description.
-- Edit existing tasks.
-- View a list of tasks with pagination.
-- Mark tasks as completed or not completed.
-- Delete tasks.
-- Success messages for user actions.
-- Uses TailwindCSS for styling.
+- Create, edit, and delete tasks
+- Mark tasks as completed or not completed
+- Store task data in a database
+- User-friendly interface with Tailwind CSS
+- Flash messages for user feedback
+- Docker support for containerized deployment
 
-## Prerequisites
-Ensure you have the following installed before running the application:
-- PHP 8.0 or later
+## Requirements
+- PHP >= 8.0
 - Composer
-- Laravel 10 or later
-- MySQL or SQLite (for database)
-- Node.js & NPM (for frontend dependencies, if applicable)
+- Laravel >= 9.x
+- Docker & Docker Compose (for containerized setup)
 
 ## Installation
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/task-list-laravel.git
-   cd task-list-laravel
-   ```
-2. Install dependencies:
-   ```sh
-   composer install
-   ```
-3. Copy the example environment file and configure your database:
-   ```sh
-   cp .env.example .env
-   ```
-   Update the `.env` file with your database credentials.
 
-4. Generate the application key:
-   ```sh
-   php artisan key:generate
-   ```
-5. Run migrations to create the database tables:
-   ```sh
-   php artisan migrate
-   ```
-6. Start the development server:
-   ```sh
-   php artisan serve
-   ```
-   The application will be available at `http://127.0.0.1:8000`.
-
-## Usage
-### Create a Task
-- Click on `Add Task!` on the homepage.
-- Fill in the task title, description, and long description.
-- Click `Add Task` to save.
-
-### Edit a Task
-- Click on a task title from the list.
-- Click `Edit`, modify the details, and click `Update Task`.
-
-### Delete a Task
-- Click on a task title.
-- Click `Delete` to remove the task permanently.
-
-### Toggle Task Completion
-- Click on a task title.
-- Click `Mark as completed` or `Mark as not completed` to toggle the completion status.
-
-## File Structure Overview
+### Clone the Repository
+```sh
+git clone https://github.com/your-repository/task-list-laravel.git
+cd task-list-laravel
 ```
-├── app
-│   ├── Models
-│   │   ├── Task.php  # Defines Task model and methods
-│   ├── Http
-│   │   ├── Requests
-│   │   │   ├── TaskRequest.php # Handles validation
-│   │   ├── Controllers
-│   │   │   ├── TaskController.php # Handles CRUD operations
-├── routes
-│   ├── web.php # Defines all application routes
-├── resources
-│   ├── views
-│   │   ├── index.blade.php  # Task list page
-│   │   ├── show.blade.php   # Single task view
-│   │   ├── create.blade.php # Task creation form
-│   │   ├── edit.blade.php   # Task edit form
-│   │   ├── layouts
-│   │   │   ├── app.blade.php  # Base layout file
-├── public
-│   ├── css
-│   ├── js
-│   ├── images
+
+### Install Dependencies
+```sh
+composer install
+```
+
+### Set Up Environment
+Copy the `.env.example` file to `.env` and configure your database settings:
+```sh
+cp .env.example .env
+```
+Generate an application key:
+```sh
+php artisan key:generate
+```
+
+### Run Migrations
+```sh
+php artisan migrate
+```
+
+### Run the Application
+```sh
+php artisan serve
+```
+Visit `http://127.0.0.1:8000` in your browser.
+
+## Docker Setup
+To run this application in a Docker container, use the following steps:
+
+### Build and Start Containers
+```sh
+docker-compose up -d --build
+```
+
+### Run Migrations in Docker Container
+```sh
+docker-compose exec app php artisan migrate
+```
+
+### Stop Containers
+```sh
+docker-compose down
+```
+
+## File Structure
+```
+app/
+├── Models/
+│   ├── Task.php
+├── Http/
+│   ├── Controllers/
+│   │   ├── TaskController.php
+│   ├── Requests/
+│   │   ├── TaskRequest.php
+├── Views/
+│   ├── tasks/
+│   │   ├── index.blade.php
+│   │   ├── show.blade.php
+│   │   ├── edit.blade.php
+│   │   ├── create.blade.php
+├── routes/
+│   ├── web.php
+├── database/
+│   ├── migrations/
+│   ├── seeders/
 ```
 
 ## Routes
-| Method | URI | Action |
-|--------|-----|--------|
-| GET | `/` | Redirect to tasks index |
-| GET | `/tasks` | Show all tasks |
-| GET | `/tasks/create` | Show create form |
-| POST | `/tasks` | Store new task |
-| GET | `/tasks/{task}` | Show single task |
-| GET | `/tasks/{task}/edit` | Show edit form |
-| PUT | `/tasks/{task}` | Update task |
-| DELETE | `/tasks/{task}` | Delete task |
+| Method | Route | Description |
+|--------|-------------|----------------------------|
+| GET | `/tasks` | Display all tasks |
+| GET | `/tasks/create` | Show form to create task |
+| POST | `/tasks` | Store a new task |
+| GET | `/tasks/{task}` | Show a specific task |
+| GET | `/tasks/{task}/edit` | Show form to edit task |
+| PUT | `/tasks/{task}` | Update a task |
+| DELETE | `/tasks/{task}` | Delete a task |
 | PUT | `/tasks/{task}/toggle-complete` | Toggle task completion |
-
-## Technologies Used
-- **Laravel**: PHP framework for backend.
-- **Blade**: Laravel templating engine.
-- **TailwindCSS**: For styling UI elements.
-- **Alpine.js**: Lightweight frontend interactions.
-- **SQLite/MySQL**: Database support.
-
-## Contribution
-Feel free to contribute! Fork the repo, make changes, and create a pull request.
 
 ## License
 This project is open-source and available under the MIT License.
-
-## Contact
-For questions or issues, contact [your email or GitHub profile].
-
